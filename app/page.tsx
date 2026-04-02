@@ -354,17 +354,7 @@ export default function Home() {
       <footer id="contact" className="border-t border-border bg-primary text-white py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 md:grid-cols-2 mb-12">
-            <div className="space-y-8">
-              <div>
-                <Image
-                  src="/you-logo-full.png"
-                  alt="Youth Organization Union"
-                  width={300}
-                  height={150}
-                  className="h-32 w-auto"
-                />
-              </div>
-              <div className="space-y-4">
+            <div className="space-y-4">
                 <h3 className="text-lg font-semibold">Contact Information</h3>
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
@@ -400,8 +390,6 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
 
             <div className="space-y-6">
               <h3 className="text-lg font-semibold">Quick Links</h3>
