@@ -331,11 +331,11 @@ export default function Home() {
             <div className="space-y-8">
               <div>
                 <Image
-                  src="/you-icon.png"
-                  alt="Y.O.U."
-                  width={120}
+                  src="/you-logo-footer.png"
+                  alt="Youth Organization Union"
+                  width={200}
                   height={120}
-                  className="h-20 w-20 brightness-0 invert"
+                  className="h-24 w-auto"
                 />
               </div>
               <div className="space-y-4">
@@ -362,8 +362,15 @@ export default function Home() {
                   <div className="flex items-start gap-3">
                     <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium">Secretariat</p>
-                      <p className="text-white/80">Global Headquarters<br />Singapore, Singapore</p>
+                      <p className="font-medium">Global Headquarters</p>
+                      <p className="text-white/80">Singapore, Singapore</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium">Vietnam Office</p>
+                      <p className="text-white/80">Ho Chi Minh City, Vietnam</p>
                     </div>
                   </div>
                 </div>
