@@ -134,38 +134,32 @@ export default function Home() {
               {
                 title: "Global Youth Summit 2024",
                 location: "Singapore",
-                date: "June 15-17, 2024",
-                fee: "$199"
+                date: "June 15-17, 2024"
               },
               {
                 title: "African Leadership Conference",
                 location: "Nairobi, Kenya",
-                date: "July 20-22, 2024",
-                fee: "$149"
+                date: "July 20-22, 2024"
               },
               {
                 title: "Asia-Pacific Youth Forum",
                 location: "Bangkok, Thailand",
-                date: "August 10-12, 2024",
-                fee: "$179"
+                date: "August 10-12, 2024"
               },
               {
                 title: "European Youth Congress",
                 location: "Berlin, Germany",
-                date: "September 5-7, 2024",
-                fee: "$219"
+                date: "September 5-7, 2024"
               },
               {
                 title: "Americas Youth Alliance",
                 location: "Toronto, Canada",
-                date: "October 15-17, 2024",
-                fee: "$189"
+                date: "October 15-17, 2024"
               },
               {
                 title: "Middle East Youth Initiative",
                 location: "Dubai, UAE",
-                date: "November 8-10, 2024",
-                fee: "$199"
+                date: "November 8-10, 2024"
               }
             ].map((event, idx) => (
               <Card key={idx} className="border-border overflow-hidden hover:shadow-lg transition-shadow flex flex-col">
@@ -178,7 +172,6 @@ export default function Home() {
                 </CardHeader>
                 <CardContent className="flex-grow space-y-4">
                   <p className="text-sm text-foreground/70">{event.date}</p>
-                  <p className="text-2xl font-bold text-primary">{event.fee}</p>
                 </CardContent>
                 <div className="border-t border-border p-4">
                   <Dialog open={showEventForm} onOpenChange={setShowEventForm}>
@@ -192,7 +185,7 @@ export default function Home() {
                         <DialogTitle>Event Registration</DialogTitle>
                         <DialogDescription>Fill in your details to register for {event.title}</DialogDescription>
                       </DialogHeader>
-                      <EventRegistrationForm eventTitle={event.title} fee={event.fee} />
+                      <EventRegistrationForm eventTitle={event.title} />
                     </DialogContent>
                   </Dialog>
                 </div>
@@ -404,7 +397,7 @@ export default function Home() {
 }
 
 // Event Registration Form Component
-function EventRegistrationForm({ eventTitle, fee }: { eventTitle: string; fee: string }) {
+function EventRegistrationForm({ eventTitle }: { eventTitle: string }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -414,8 +407,8 @@ function EventRegistrationForm({ eventTitle, fee }: { eventTitle: string; fee: s
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Event registration:', { ...formData, event: eventTitle, fee })
-    alert(`Registration submitted! We'll process your payment for ${fee}`)
+    console.log('Event registration:', { ...formData, event: eventTitle })
+    alert(`Thank you for registering for ${eventTitle}! We'll send you confirmation details via email.`)
   }
 
   return (
@@ -455,12 +448,8 @@ function EventRegistrationForm({ eventTitle, fee }: { eventTitle: string; fee: s
           onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
         />
       </div>
-      <div className="bg-muted p-4 rounded-lg">
-        <p className="text-sm font-medium text-foreground">Total: <span className="text-primary text-lg">{fee}</span></p>
-        <p className="text-xs text-foreground/60 mt-1">You will be redirected to complete payment via PayPal/Visa</p>
-      </div>
       <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white">
-        Proceed to Payment
+        Register Now
       </Button>
     </form>
   )
