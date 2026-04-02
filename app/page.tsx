@@ -22,13 +22,14 @@ export default function Home() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Image
-                src="/you-logo-full.png"
+                src="/you-icon.png"
                 alt="Youth Organization Union"
-                width={300}
-                height={100}
-                className="h-16 w-auto"
+                width={80}
+                height={80}
+                className="h-12 w-auto"
                 priority
               />
+              <span className="font-bold text-xl text-primary">Y.O.U.</span>
             </div>
             <nav className="hidden gap-8 md:flex">
               <a href="#home" className="text-sm font-medium text-foreground hover:text-primary transition-colors">Home</a>
@@ -356,11 +357,11 @@ export default function Home() {
             <div className="space-y-8">
               <div>
                 <Image
-                  src="/you-logo-footer.png"
+                  src="/you-logo-full.png"
                   alt="Youth Organization Union"
-                  width={200}
-                  height={120}
-                  className="h-24 w-auto"
+                  width={300}
+                  height={150}
+                  className="h-32 w-auto"
                 />
               </div>
               <div className="space-y-4">
