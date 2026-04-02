@@ -250,10 +250,35 @@ export default function Home() {
             </div>
 
             <div className="relative h-96 sm:h-[500px]">
-              <Card className="h-full border-2 border-dashed border-primary/30 flex items-center justify-center">
-                <CardContent className="text-center space-y-4">
+              <Card className="h-full border-2 border-primary/30 flex flex-col items-center justify-between p-8">
+                <CardContent className="text-center space-y-6 flex-grow flex flex-col items-center justify-center w-full">
                   <div className="text-6xl">🌍</div>
                   <p className="text-lg font-semibold text-foreground">Your Passport to Global Opportunities</p>
+                  
+                  <div className="w-full grid grid-cols-2 gap-4 pt-6">
+                    <div className="bg-secondary/10 rounded-lg p-4">
+                      <p className="text-2xl font-bold text-primary">50K+</p>
+                      <p className="text-xs text-foreground/70 mt-1">Users Worldwide</p>
+                    </div>
+                    <div className="bg-accent/10 rounded-lg p-4">
+                      <p className="text-2xl font-bold text-accent">85+</p>
+                      <p className="text-xs text-foreground/70 mt-1">Countries</p>
+                    </div>
+                  </div>
+
+                  <div className="w-full pt-4">
+                    <p className="text-xs text-foreground/60 mb-3 font-medium">Join youth leaders from around the world:</p>
+                    <div className="flex justify-center items-center gap-2 flex-wrap">
+                      <span className="text-2xl">🇻🇳</span>
+                      <span className="text-2xl">🇲🇽</span>
+                      <span className="text-2xl">🇳🇬</span>
+                      <span className="text-2xl">🇮🇳</span>
+                      <span className="text-2xl">🇧🇷</span>
+                      <span className="text-2xl">🇵🇭</span>
+                      <span className="text-2xl">🇰🇪</span>
+                      <span className="text-2xl">🇹🇭</span>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </div>
