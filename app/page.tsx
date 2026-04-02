@@ -22,13 +22,14 @@ export default function Home() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Image
-                src="/you-logo-full.png"
+                src="/you-icon.png"
                 alt="Youth Organization Union"
-                width={300}
-                height={100}
-                className="h-16 w-auto"
+                width={80}
+                height={80}
+                className="h-12 w-auto"
                 priority
               />
+              <span className="font-bold text-xl text-primary">Y.O.U.</span>
             </div>
             <nav className="hidden gap-8 md:flex">
               <a href="#home" className="text-sm font-medium text-foreground hover:text-primary transition-colors">Home</a>
@@ -63,7 +64,7 @@ export default function Home() {
                 </Button>
               </div>
               <div className="text-sm text-foreground/60">
-                <p className="font-semibold text-primary">GLOBAL CITIZEN EST. 2024</p>
+                <p className="font-semibold text-primary">GLOBAL CITIZEN EST. 2026</p>
               </div>
             </div>
             <div className="relative h-96 sm:h-[500px] flex items-center justify-center">
@@ -132,40 +133,34 @@ export default function Home() {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[
               {
-                title: "Global Youth Summit 2024",
+                title: "Global Youth Summit 2026",
                 location: "Singapore",
-                date: "June 15-17, 2024",
-                fee: "$199"
+                date: "June 15-17, 2026"
               },
               {
                 title: "African Leadership Conference",
                 location: "Nairobi, Kenya",
-                date: "July 20-22, 2024",
-                fee: "$149"
+                date: "July 20-22, 2026"
               },
               {
                 title: "Asia-Pacific Youth Forum",
                 location: "Bangkok, Thailand",
-                date: "August 10-12, 2024",
-                fee: "$179"
+                date: "August 10-12, 2026"
               },
               {
                 title: "European Youth Congress",
                 location: "Berlin, Germany",
-                date: "September 5-7, 2024",
-                fee: "$219"
+                date: "September 5-7, 2026"
               },
               {
                 title: "Americas Youth Alliance",
                 location: "Toronto, Canada",
-                date: "October 15-17, 2024",
-                fee: "$189"
+                date: "October 15-17, 2026"
               },
               {
                 title: "Middle East Youth Initiative",
                 location: "Dubai, UAE",
-                date: "November 8-10, 2024",
-                fee: "$199"
+                date: "November 8-10, 2026"
               }
             ].map((event, idx) => (
               <Card key={idx} className="border-border overflow-hidden hover:shadow-lg transition-shadow flex flex-col">
@@ -178,7 +173,6 @@ export default function Home() {
                 </CardHeader>
                 <CardContent className="flex-grow space-y-4">
                   <p className="text-sm text-foreground/70">{event.date}</p>
-                  <p className="text-2xl font-bold text-primary">{event.fee}</p>
                 </CardContent>
                 <div className="border-t border-border p-4">
                   <Dialog open={showEventForm} onOpenChange={setShowEventForm}>
@@ -192,7 +186,7 @@ export default function Home() {
                         <DialogTitle>Event Registration</DialogTitle>
                         <DialogDescription>Fill in your details to register for {event.title}</DialogDescription>
                       </DialogHeader>
-                      <EventRegistrationForm eventTitle={event.title} fee={event.fee} />
+                      <EventRegistrationForm eventTitle={event.title} />
                     </DialogContent>
                   </Dialog>
                 </div>
@@ -257,10 +251,35 @@ export default function Home() {
             </div>
 
             <div className="relative h-96 sm:h-[500px]">
-              <Card className="h-full border-2 border-dashed border-primary/30 flex items-center justify-center">
-                <CardContent className="text-center space-y-4">
+              <Card className="h-full border-2 border-primary/30 flex flex-col items-center justify-between p-8">
+                <CardContent className="text-center space-y-6 flex-grow flex flex-col items-center justify-center w-full">
                   <div className="text-6xl">🌍</div>
                   <p className="text-lg font-semibold text-foreground">Your Passport to Global Opportunities</p>
+                  
+                  <div className="w-full grid grid-cols-2 gap-4 pt-6">
+                    <div className="bg-secondary/10 rounded-lg p-4">
+                      <p className="text-2xl font-bold text-primary">50K+</p>
+                      <p className="text-xs text-foreground/70 mt-1">Users Worldwide</p>
+                    </div>
+                    <div className="bg-accent/10 rounded-lg p-4">
+                      <p className="text-2xl font-bold text-accent">85+</p>
+                      <p className="text-xs text-foreground/70 mt-1">Countries</p>
+                    </div>
+                  </div>
+
+                  <div className="w-full pt-4">
+                    <p className="text-xs text-foreground/60 mb-3 font-medium">Join youth leaders from around the world:</p>
+                    <div className="flex justify-center items-center gap-2 flex-wrap">
+                      <span className="text-2xl">🇻🇳</span>
+                      <span className="text-2xl">🇲🇽</span>
+                      <span className="text-2xl">🇳🇬</span>
+                      <span className="text-2xl">🇮🇳</span>
+                      <span className="text-2xl">🇧🇷</span>
+                      <span className="text-2xl">🇵🇭</span>
+                      <span className="text-2xl">🇰🇪</span>
+                      <span className="text-2xl">🇹🇭</span>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -335,17 +354,7 @@ export default function Home() {
       <footer id="contact" className="border-t border-border bg-primary text-white py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 md:grid-cols-2 mb-12">
-            <div className="space-y-8">
-              <div>
-                <Image
-                  src="/you-icon.png"
-                  alt="Y.O.U."
-                  width={120}
-                  height={120}
-                  className="h-20 w-20 brightness-0 invert"
-                />
-              </div>
-              <div className="space-y-4">
+            <div className="space-y-4">
                 <h3 className="text-lg font-semibold">Contact Information</h3>
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
@@ -369,12 +378,18 @@ export default function Home() {
                   <div className="flex items-start gap-3">
                     <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium">Secretariat</p>
-                      <p className="text-white/80">Global Headquarters<br />Singapore, Singapore</p>
+                      <p className="font-medium">Global Headquarters</p>
+                      <p className="text-white/80">Singapore, Singapore</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium">Vietnam Office</p>
+                      <p className="text-white/80">Ho Chi Minh City, Vietnam</p>
                     </div>
                   </div>
                 </div>
-              </div>
             </div>
 
             <div className="space-y-6">
@@ -395,7 +410,7 @@ export default function Home() {
           </div>
 
           <div className="border-t border-white/20 pt-8 text-center text-white/70">
-            <p>&copy; 2024 Youth Organization Union. All rights reserved. | Global Citizen EST. 2024</p>
+            <p>&copy; 2026 Youth Organization Union. All rights reserved. | Global Citizen EST. 2026</p>
           </div>
         </div>
       </footer>
@@ -404,7 +419,7 @@ export default function Home() {
 }
 
 // Event Registration Form Component
-function EventRegistrationForm({ eventTitle, fee }: { eventTitle: string; fee: string }) {
+function EventRegistrationForm({ eventTitle }: { eventTitle: string }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -414,8 +429,8 @@ function EventRegistrationForm({ eventTitle, fee }: { eventTitle: string; fee: s
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Event registration:', { ...formData, event: eventTitle, fee })
-    alert(`Registration submitted! We'll process your payment for ${fee}`)
+    console.log('Event registration:', { ...formData, event: eventTitle })
+    alert(`Thank you for registering for ${eventTitle}! We'll send you confirmation details via email.`)
   }
 
   return (
@@ -455,12 +470,8 @@ function EventRegistrationForm({ eventTitle, fee }: { eventTitle: string; fee: s
           onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
         />
       </div>
-      <div className="bg-muted p-4 rounded-lg">
-        <p className="text-sm font-medium text-foreground">Total: <span className="text-primary text-lg">{fee}</span></p>
-        <p className="text-xs text-foreground/60 mt-1">You will be redirected to complete payment via PayPal/Visa</p>
-      </div>
       <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white">
-        Proceed to Payment
+        Register Now
       </Button>
     </form>
   )
