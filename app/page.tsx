@@ -74,9 +74,8 @@ function EventsCarousel({ showEventForm, setShowEventForm }: { showEventForm: bo
           {events.map((event, index) => (
             <div
               key={index}
-              className={`absolute inset-0 transition-opacity duration-500 ${
-                index === currentSlide ? 'opacity-100' : 'opacity-0'
-              }`}
+              className={`absolute inset-0 transition-opacity duration-500 ${index === currentSlide ? 'opacity-100' : 'opacity-0'
+                }`}
             >
               <div className="h-full bg-gradient-to-br from-primary/20 to-secondary/20 backdrop-blur-sm rounded-lg border border-primary/30 p-8 sm:p-12 flex flex-col justify-between">
                 <div>
@@ -129,11 +128,10 @@ function EventsCarousel({ showEventForm, setShowEventForm }: { showEventForm: bo
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`h-2 rounded-full transition-all ${
-              index === currentSlide
+            className={`h-2 rounded-full transition-all ${index === currentSlide
                 ? 'bg-primary w-8'
                 : 'bg-foreground/30 hover:bg-foreground/50 w-2'
-            }`}
+              }`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
@@ -228,7 +226,7 @@ export default function Home() {
                 className="h-12 w-auto"
                 priority
               />
-              <span className="font-bold text-xl text-primary">Y.O.U.</span>
+              <span className="font-bold text-xl text-primary">Y.O.U</span>
             </div>
             <nav className="hidden gap-8 md:flex">
               <a href="#home" className="text-sm font-medium text-foreground hover:text-primary transition-colors">Home</a>
@@ -248,7 +246,7 @@ export default function Home() {
             <div className="space-y-8">
               <div className="space-y-4">
                 <h1 className="text-balance text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-                  All Youths Start with <span className="text-primary">Y.O.U.</span>
+                  All Youths Start with <span className="text-primary">Y.O.U</span>
                 </h1>
                 <p className="text-xl text-foreground/70 leading-relaxed">
                   A Global Citizen movement connecting youth organization founders with international events and transformative educational experiences.
@@ -301,7 +299,7 @@ export default function Home() {
               Our Vision: A Global Hub
             </h2>
             <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Y.O.U. is building the world&apos;s premier network for youth leaders, connecting organizations and creating opportunities for global collaboration and impact.
+              Y.O.U is building the world&apos;s premier network for youth leaders, connecting organizations and creating opportunities for global collaboration and impact.
             </p>
           </div>
 
@@ -637,7 +635,7 @@ export default function Home() {
                 <CardContent className="text-center space-y-6 flex-grow flex flex-col items-center justify-center w-full">
                   <div className="text-6xl">🌍</div>
                   <p className="text-lg font-semibold text-foreground">Your Passport to Global Opportunities</p>
-                  
+
                   <div className="w-full grid grid-cols-2 gap-4 pt-6">
                     <div className="bg-secondary/10 rounded-lg p-4">
                       <p className="text-2xl font-bold text-primary">50K+</p>
@@ -709,7 +707,7 @@ export default function Home() {
               Join Our Alliance
             </h2>
             <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Are you a youth organization founder or leader? Apply to become part of the Y.O.U. global network. We&apos;ll contact you to discuss partnership opportunities.
+              Are you a youth organization founder or leader? Apply to become part of the Y.O.U global network. We&apos;ll contact you to discuss partnership opportunities.
             </p>
           </div>
 
@@ -737,41 +735,41 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-12 md:grid-cols-2 mb-12">
             <div className="space-y-4">
-                <h3 className="text-lg font-semibold">Contact Information</h3>
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <Mail className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium">Email</p>
-                      <a href="mailto:hello@you-global.org" className="text-white/80 hover:text-white transition-colors">
-                        hello@you-global.org
-                      </a>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Phone className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium">Phone</p>
-                      <a href="tel:+1234567890" className="text-white/80 hover:text-white transition-colors">
-                        +1 (234) 567-8900
-                      </a>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium">Global Headquarters</p>
-                      <p className="text-white/80">Singapore, Singapore</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="font-medium">Vietnam Office</p>
-                      <p className="text-white/80">Ho Chi Minh City, Vietnam</p>
-                    </div>
+              <h3 className="text-lg font-semibold">Contact Information</h3>
+              <div className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <Mail className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="font-medium">Email</p>
+                    <a href="mailto:hello@you-global.org" className="text-white/80 hover:text-white transition-colors">
+                      hello@you-global.org
+                    </a>
                   </div>
                 </div>
+                <div className="flex items-start gap-3">
+                  <Phone className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="font-medium">Phone</p>
+                    <a href="tel:+1234567890" className="text-white/80 hover:text-white transition-colors">
+                      +1 (234) 567-8900
+                    </a>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="font-medium">Global Headquarters</p>
+                    <p className="text-white/80">Singapore, Singapore</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="font-medium">Vietnam Office</p>
+                    <p className="text-white/80">Ho Chi Minh City, Vietnam</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="space-y-6">
