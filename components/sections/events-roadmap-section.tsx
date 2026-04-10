@@ -35,13 +35,19 @@ const COLOR_SCHEMES = [
 ]
 
 function getQuarter(isoDate: string) {
-  const month = new Date(isoDate).getUTCMonth() + 1
+  const date = new Date(`${isoDate}T00:00:00Z`)
+  const month = date.getUTCMonth() + 1
+  const year = date.getUTCFullYear()
   const quarter = Math.ceil(month / 3)
-  return `Q${quarter} 2026`
+  return `Q${quarter} ${year}`
 }
 
 function getMonthYear(isoDate: string) {
-  return new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(new Date(isoDate))
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(`${isoDate}T00:00:00Z`))
 }
 
 export function EventsRoadmapSection({ events, onRegister }: EventsRoadmapSectionProps) {
@@ -84,10 +90,11 @@ export function EventsRoadmapSection({ events, onRegister }: EventsRoadmapSectio
                         <p className="text-sm text-foreground/60">{getMonthYear(event.isoDate)}</p>
                         <Button
                           size="sm"
-                          className="bg-primary text-white hover:bg-primary/90"
+                          className={event.isNext ? 'bg-primary text-white hover:bg-primary/90' : 'bg-muted text-foreground/70 hover:bg-muted'}
                           onClick={() => onRegister(event.title)}
+                          disabled={!event.isNext}
                         >
-                          Register
+                          {event.isNext ? 'Register' : 'Coming Soon'}
                         </Button>
                       </div>
                     </article>

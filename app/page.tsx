@@ -17,6 +17,7 @@ import { TestimonialsSection } from '@/components/sections/testimonials-section'
 import { EventsCountdownBanner } from '@/components/sections/events-countdown-banner'
 import { EventsRoadmapSection } from '@/components/sections/events-roadmap-section'
 import { EventRegistrationDialog } from '@/components/forms/event-registration-dialog'
+import type { RegistrationPrefillData } from '@/components/forms/event-registration.types'
 import { FounderApplicationForm } from '@/components/forms/founder-application-form'
 import { CountdownTimer } from '@/components/countdown-timer'
 
@@ -87,19 +88,19 @@ const NAV_LINKS = [
 export default function Home() {
   const [showApplyForm, setShowApplyForm] = useState(false)
   const nextEvent = EVENTS.find((event) => event.isNext) ?? EVENTS[0]
+  const validTicketTypeIds = new Set(TICKET_TYPES.map((ticket) => ticket.id))
+
+  const sanitizeTicketType = (ticketType?: string) => {
+    if (!ticketType) return undefined
+    return validTicketTypeIds.has(ticketType) ? ticketType : undefined
+  }
 
   const [registration, setRegistration] = useState<{
     open: boolean
     eventTitle: string
     eventDate: string
     preselectedTicket?: string
-    initialFormData?: {
-      name: string
-      email: string
-      phone: string
-      organization: string
-      ticketType: string
-    }
+    initialFormData?: RegistrationPrefillData
   }>({ open: false, eventTitle: '', eventDate: '' })
 
   const [registrationForm, setRegistrationForm] = useState({
@@ -115,22 +116,29 @@ export default function Home() {
     eventTitle: string,
     eventDate: string,
     preselectedTicket?: string,
-    initialFormData?: {
-      name: string
-      email: string
-      phone: string
-      organization: string
-      ticketType: string
-    },
+    initialFormData?: RegistrationPrefillData,
   ) => {
-    setRegistration({ open: true, eventTitle, eventDate, preselectedTicket, initialFormData })
+    const safeTicketType = sanitizeTicketType(preselectedTicket)
+    const safeInitialFormData = initialFormData
+      ? { ...initialFormData, ticketType: sanitizeTicketType(initialFormData.ticketType) || '' }
+      : undefined
+
+    setRegistration({
+      open: true,
+      eventTitle,
+      eventDate,
+      preselectedTicket: safeTicketType,
+      initialFormData: safeInitialFormData,
+    })
   }
 
   const scrollToRegistrationForm = (eventTitle: string, preselectedTicket?: string) => {
+    const safeTicketType = sanitizeTicketType(preselectedTicket)
+
     setRegistrationForm((prev) => ({
       ...prev,
       eventTitle,
-      ticketType: preselectedTicket ?? prev.ticketType,
+      ticketType: safeTicketType ?? prev.ticketType,
     }))
 
     document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -457,9 +465,13 @@ export default function Home() {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {EVENTS.map((event, idx) => (
               <Card key={idx} className="border-border overflow-hidden hover:shadow-lg transition-shadow flex flex-col">
-                {event.isNext && (
+                {event.isNext ? (
                   <div className="bg-primary px-4 py-1.5 text-xs font-semibold text-white text-center tracking-wider uppercase">
                     Next Event — Register Now
+                  </div>
+                ) : (
+                  <div className="bg-muted px-4 py-1.5 text-xs font-semibold text-foreground/70 text-center tracking-wider uppercase">
+                    Coming Soon
                   </div>
                 )}
                 <CardHeader>
@@ -485,8 +497,9 @@ export default function Home() {
                   <Button
                     className="w-full bg-secondary hover:bg-secondary/90 text-foreground"
                     onClick={() => scrollToRegistrationForm(event.title)}
+                    disabled={!event.isNext}
                   >
-                    Register Now
+                    {event.isNext ? 'Register Now' : 'Coming Soon'}
                   </Button>
                 </div>
               </Card>
@@ -620,7 +633,7 @@ export default function Home() {
                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                   >
                     {EVENTS.map((event) => (
-                      <option key={event.title} value={event.title}>
+                      <option key={event.title} value={event.title} disabled={!event.isNext}>
                         {event.title} ({event.date})
                       </option>
                     ))}
@@ -634,7 +647,10 @@ export default function Home() {
                   <select
                     required
                     value={registrationForm.ticketType}
-                    onChange={(e) => setRegistrationForm((prev) => ({ ...prev, ticketType: e.target.value }))}
+                    onChange={(e) => setRegistrationForm((prev) => ({
+                      ...prev,
+                      ticketType: sanitizeTicketType(e.target.value) || '',
+                    }))}
                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                   >
                     <option value="" disabled>Select a ticket</option>

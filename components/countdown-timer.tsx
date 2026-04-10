@@ -14,19 +14,42 @@ interface CountdownTimerProps {
   label?: string
 }
 
+function parseTargetTime(targetDate: string) {
+  const normalizedTarget = /^\d{4}-\d{2}-\d{2}$/.test(targetDate)
+    ? `${targetDate}T00:00:00Z`
+    : targetDate
+
+  return new Date(normalizedTarget).getTime()
+}
+
 export function CountdownTimer({ targetDate, label = 'Event starts in' }: CountdownTimerProps) {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 })
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
+    let intervalId: ReturnType<typeof setInterval> | null = null
+
     const calculate = () => {
-      const target = new Date(targetDate).getTime()
+      const target = parseTargetTime(targetDate)
+      if (Number.isNaN(target)) {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+        if (intervalId) {
+          clearInterval(intervalId)
+          intervalId = null
+        }
+        return
+      }
+
       const now = new Date().getTime()
       const diff = target - now
 
       if (diff <= 0) {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+        if (intervalId) {
+          clearInterval(intervalId)
+          intervalId = null
+        }
         return
       }
 
@@ -39,8 +62,10 @@ export function CountdownTimer({ targetDate, label = 'Event starts in' }: Countd
     }
 
     calculate()
-    const interval = setInterval(calculate, 1000)
-    return () => clearInterval(interval)
+    intervalId = setInterval(calculate, 1000)
+    return () => {
+      if (intervalId) clearInterval(intervalId)
+    }
   }, [targetDate])
 
   if (!mounted) return null
