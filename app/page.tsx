@@ -9,6 +9,72 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Mail, MapPin, Phone, Send } from 'lucide-react'
 import Image from 'next/image'
 
+// Countdown Banner Component
+function CountdownBanner() {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  })
+
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      const targetDate = new Date('2026-06-15').getTime()
+      const now = new Date().getTime()
+      const difference = targetDate - now
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60)
+        })
+      }
+    }
+
+    calculateTimeLeft()
+    const timer = setInterval(calculateTimeLeft, 1000)
+    return () => clearInterval(timer)
+  }, [])
+
+  return (
+    <div className="bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 border border-primary/20 rounded-lg p-8">
+      <div className="text-center space-y-6">
+        <div>
+          <p className="text-sm font-semibold text-primary mb-2">COMING SOON</p>
+          <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">Global Youth Summit 2026</h3>
+          <p className="text-foreground/70">June 15-17, 2026 • Singapore</p>
+        </div>
+
+        <div className="grid grid-cols-4 gap-4 max-w-md mx-auto">
+          <div className="bg-primary/10 rounded-lg p-4 text-center">
+            <p className="text-3xl font-bold text-primary">{timeLeft.days}</p>
+            <p className="text-xs text-foreground/60 mt-1">Days</p>
+          </div>
+          <div className="bg-secondary/10 rounded-lg p-4 text-center">
+            <p className="text-3xl font-bold text-secondary">{timeLeft.hours}</p>
+            <p className="text-xs text-foreground/60 mt-1">Hours</p>
+          </div>
+          <div className="bg-accent/10 rounded-lg p-4 text-center">
+            <p className="text-3xl font-bold text-accent">{timeLeft.minutes}</p>
+            <p className="text-xs text-foreground/60 mt-1">Minutes</p>
+          </div>
+          <div className="bg-primary/10 rounded-lg p-4 text-center">
+            <p className="text-3xl font-bold text-primary">{timeLeft.seconds}</p>
+            <p className="text-xs text-foreground/60 mt-1">Seconds</p>
+          </div>
+        </div>
+
+        <Button className="bg-primary hover:bg-primary/90 text-white">
+          Register Now
+        </Button>
+      </div>
+    </div>
+  )
+}
+
 export default function Home() {
   const [showEventForm, setShowEventForm] = useState(false)
   const [showPassportForm, setShowPassportForm] = useState(false)
