@@ -9,6 +9,139 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Mail, MapPin, Phone, Send } from 'lucide-react'
 import Image from 'next/image'
 
+// Events Carousel Component
+function EventsCarousel({ showEventForm, setShowEventForm }: { showEventForm: boolean; setShowEventForm: (value: boolean) => void }) {
+  const [currentSlide, setCurrentSlide] = useState(0)
+
+  const events = [
+    {
+      title: "Global Youth Summit 2026",
+      location: "Singapore",
+      date: "June 15-17, 2026",
+      description: "Connect with youth leaders and organization founders from around the world. Network, learn, and collaborate on global initiatives.",
+      icon: "🌟"
+    },
+    {
+      title: "African Leadership Conference",
+      location: "Nairobi, Kenya",
+      date: "July 20-22, 2026",
+      description: "Explore leadership opportunities and sustainable development goals with African youth organizations and international partners.",
+      icon: "🌍"
+    },
+    {
+      title: "Asia-Pacific Youth Forum",
+      location: "Bangkok, Thailand",
+      date: "August 10-12, 2026",
+      description: "Discover cross-cultural collaboration and innovation in the Asia-Pacific region with emerging youth leaders.",
+      icon: "🚀"
+    },
+    {
+      title: "European Youth Congress",
+      location: "Berlin, Germany",
+      date: "September 5-7, 2026",
+      description: "Join discussions on global citizenship, social impact, and building bridges across European youth organizations.",
+      icon: "🤝"
+    },
+    {
+      title: "Americas Youth Alliance",
+      location: "Toronto, Canada",
+      date: "October 15-17, 2026",
+      description: "Unite with North and South American youth leaders for collaborative projects and cultural exchange.",
+      icon: "💡"
+    },
+    {
+      title: "Middle East Youth Initiative",
+      location: "Dubai, UAE",
+      date: "November 8-10, 2026",
+      description: "Engage with Middle Eastern youth organizations and explore innovation and entrepreneurship opportunities.",
+      icon: "✨"
+    }
+  ]
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % events.length)
+  }
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + events.length) % events.length)
+  }
+
+  return (
+    <div className="relative">
+      {/* Carousel Container */}
+      <div className="overflow-hidden rounded-lg">
+        <div className="relative h-96 sm:h-[420px]">
+          {events.map((event, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-500 ${
+                index === currentSlide ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <div className="h-full bg-gradient-to-br from-primary/20 to-secondary/20 backdrop-blur-sm rounded-lg border border-primary/30 p-8 sm:p-12 flex flex-col justify-between">
+                <div>
+                  <div className="text-6xl mb-6">{event.icon}</div>
+                  <h3 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">{event.title}</h3>
+                  <div className="flex flex-col gap-2 mb-6">
+                    <p className="text-lg text-secondary font-semibold">{event.location}</p>
+                    <p className="text-sm text-foreground/70">{event.date}</p>
+                  </div>
+                  <p className="text-foreground/80 text-lg leading-relaxed max-w-2xl">{event.description}</p>
+                </div>
+
+                <Button
+                  onClick={() => setShowEventForm(true)}
+                  className="mt-8 bg-primary hover:bg-primary/90 text-white w-fit"
+                  size="lg"
+                >
+                  Register for Event
+                </Button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Navigation Buttons */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 sm:-translate-x-6 z-10 bg-primary hover:bg-primary/90 text-white rounded-full p-2 transition-all"
+        aria-label="Previous slide"
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <button
+        onClick={nextSlide}
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 sm:translate-x-6 z-10 bg-primary hover:bg-primary/90 text-white rounded-full p-2 transition-all"
+        aria-label="Next slide"
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      {/* Indicators */}
+      <div className="flex justify-center gap-2 mt-6">
+        {events.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={`h-2 rounded-full transition-all ${
+              index === currentSlide
+                ? 'bg-primary w-8'
+                : 'bg-foreground/30 hover:bg-foreground/50 w-2'
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
 // Countdown Banner Component
 function CountdownBanner() {
   const [timeLeft, setTimeLeft] = useState({
@@ -143,6 +276,20 @@ export default function Home() {
               />
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Events Carousel Section */}
+      <section className="border-t border-border bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 py-16 sm:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-8 text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
+              Upcoming Events
+            </h2>
+            <p className="text-foreground/70">Explore our global events and join the movement</p>
+          </div>
+
+          <EventsCarousel showEventForm={showEventForm} setShowEventForm={setShowEventForm} />
         </div>
       </section>
 
