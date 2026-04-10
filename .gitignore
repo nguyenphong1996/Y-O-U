@@ -4,6 +4,7 @@ __v0_devtools.tsx
 __v0_jsx-dev-runtime.ts
 .snowflake/
 .v0-trash/
+.omc/
 .vercel/
 next.user-config.*
 
@@ -14,6 +15,8 @@ next.user-config.*
 node_modules
 .next/
 .DS_Store
+components/forms/event-registration.types.ts
+tsconfig.tsbuildinfo
 
 # SQLite database (contains user data — never commit)
 data/

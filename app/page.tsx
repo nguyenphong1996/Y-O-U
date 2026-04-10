@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Mail, MapPin, Phone, Menu } from 'lucide-react'
@@ -10,10 +11,13 @@ import Image from 'next/image'
 
 import { HowItWorksSection } from '@/components/sections/how-it-works-section'
 import { BenefitsSection } from '@/components/sections/benefits-section'
-import { PricingSection } from '@/components/sections/pricing-section'
+import { PricingSection, TICKET_TYPES } from '@/components/sections/pricing-section'
 import { FAQSection } from '@/components/sections/faq-section'
 import { TestimonialsSection } from '@/components/sections/testimonials-section'
+import { EventsCountdownBanner } from '@/components/sections/events-countdown-banner'
+import { EventsRoadmapSection } from '@/components/sections/events-roadmap-section'
 import { EventRegistrationDialog } from '@/components/forms/event-registration-dialog'
+import type { RegistrationPrefillData } from '@/components/forms/event-registration.types'
 import { FounderApplicationForm } from '@/components/forms/founder-application-form'
 import { CountdownTimer } from '@/components/countdown-timer'
 
@@ -83,15 +87,75 @@ const NAV_LINKS = [
 
 export default function Home() {
   const [showApplyForm, setShowApplyForm] = useState(false)
+  const nextEvent = EVENTS.find((event) => event.isNext) ?? EVENTS[0]
+  const validTicketTypeIds = new Set(TICKET_TYPES.map((ticket) => ticket.id))
+
+  const sanitizeTicketType = (ticketType?: string) => {
+    if (!ticketType) return undefined
+    return validTicketTypeIds.has(ticketType) ? ticketType : undefined
+  }
+
   const [registration, setRegistration] = useState<{
     open: boolean
     eventTitle: string
     eventDate: string
     preselectedTicket?: string
+    initialFormData?: RegistrationPrefillData
   }>({ open: false, eventTitle: '', eventDate: '' })
 
-  const openRegistration = (eventTitle: string, eventDate: string, preselectedTicket?: string) => {
-    setRegistration({ open: true, eventTitle, eventDate, preselectedTicket })
+  const [registrationForm, setRegistrationForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    organization: '',
+    eventTitle: nextEvent.title,
+    ticketType: '',
+  })
+
+  const openRegistrationDialog = (
+    eventTitle: string,
+    eventDate: string,
+    preselectedTicket?: string,
+    initialFormData?: RegistrationPrefillData,
+  ) => {
+    const safeTicketType = sanitizeTicketType(preselectedTicket)
+    const safeInitialFormData = initialFormData
+      ? { ...initialFormData, ticketType: sanitizeTicketType(initialFormData.ticketType) || '' }
+      : undefined
+
+    setRegistration({
+      open: true,
+      eventTitle,
+      eventDate,
+      preselectedTicket: safeTicketType,
+      initialFormData: safeInitialFormData,
+    })
+  }
+
+  const scrollToRegistrationForm = (eventTitle: string, preselectedTicket?: string) => {
+    const safeTicketType = sanitizeTicketType(preselectedTicket)
+
+    setRegistrationForm((prev) => ({
+      ...prev,
+      eventTitle,
+      ticketType: safeTicketType ?? prev.ticketType,
+    }))
+
+    document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  const handleRegistrationFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+
+    const selectedEvent = EVENTS.find((event) => event.title === registrationForm.eventTitle) ?? nextEvent
+
+    openRegistrationDialog(selectedEvent.title, selectedEvent.date, registrationForm.ticketType || undefined, {
+      name: registrationForm.name,
+      email: registrationForm.email,
+      phone: registrationForm.phone,
+      organization: registrationForm.organization,
+      ticketType: registrationForm.ticketType,
+    })
   }
 
   return (
@@ -139,7 +203,7 @@ export default function Home() {
               <Button
                 size="sm"
                 className="bg-primary hover:bg-primary/90 text-white"
-                onClick={() => openRegistration(EVENTS[0].title, EVENTS[0].date)}
+                onClick={() => scrollToRegistrationForm(nextEvent.title)}
               >
                 Join Us
               </Button>
@@ -176,7 +240,7 @@ export default function Home() {
                     </Button>
                     <Button
                       className="w-full bg-primary hover:bg-primary/90 text-white"
-                      onClick={() => openRegistration(EVENTS[0].title, EVENTS[0].date)}
+                      onClick={() => scrollToRegistrationForm(nextEvent.title)}
                     >
                       Register for Event
                     </Button>
@@ -383,6 +447,13 @@ export default function Home() {
       {/* ── Events ──────────────────────────────────────────────────────────── */}
       <section id="events" className="border-t border-border bg-white py-20 sm:py-32 dark:bg-slate-950/50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <EventsCountdownBanner
+            title={nextEvent.title}
+            dateLabel={`${nextEvent.date} - ${nextEvent.location}`}
+            targetDate={nextEvent.isoDate}
+            onRegister={() => scrollToRegistrationForm(nextEvent.title)}
+          />
+
           <div className="mb-16 text-center">
             <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-3">2026 Calendar</p>
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
@@ -394,9 +465,13 @@ export default function Home() {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {EVENTS.map((event, idx) => (
               <Card key={idx} className="border-border overflow-hidden hover:shadow-lg transition-shadow flex flex-col">
-                {event.isNext && (
+                {event.isNext ? (
                   <div className="bg-primary px-4 py-1.5 text-xs font-semibold text-white text-center tracking-wider uppercase">
                     Next Event — Register Now
+                  </div>
+                ) : (
+                  <div className="bg-muted px-4 py-1.5 text-xs font-semibold text-foreground/70 text-center tracking-wider uppercase">
+                    Coming Soon
                   </div>
                 )}
                 <CardHeader>
@@ -421,9 +496,10 @@ export default function Home() {
                 <div className="border-t border-border p-4">
                   <Button
                     className="w-full bg-secondary hover:bg-secondary/90 text-foreground"
-                    onClick={() => openRegistration(event.title, event.date)}
+                    onClick={() => scrollToRegistrationForm(event.title)}
+                    disabled={!event.isNext}
                   >
-                    Register Now
+                    {event.isNext ? 'Register Now' : 'Coming Soon'}
                   </Button>
                 </div>
               </Card>
@@ -432,10 +508,15 @@ export default function Home() {
         </div>
       </section>
 
+      <EventsRoadmapSection
+        events={EVENTS}
+        onRegister={(eventTitle) => scrollToRegistrationForm(eventTitle)}
+      />
+
       {/* ── Pricing ─────────────────────────────────────────────────────────── */}
       <PricingSection
         onSelectTicket={(ticketId) =>
-          openRegistration(EVENTS[0].title, EVENTS[0].date, ticketId)
+          scrollToRegistrationForm(nextEvent.title, ticketId)
         }
       />
 
@@ -482,35 +563,115 @@ export default function Home() {
       {/* ── FAQ ─────────────────────────────────────────────────────────────── */}
       <FAQSection />
 
-      {/* ── Join Our Alliance ────────────────────────────────────────────────── */}
+      {/* ── Event Registration Form ─────────────────────────────────────────── */}
       <section id="apply" className="border-t border-border py-20 sm:py-32">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-2xl bg-gradient-to-br from-primary/5 via-background to-accent/5 border border-primary/20 p-8 sm:p-12 text-center">
-            <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-3">Free Membership</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Join Our Alliance
+          <div className="rounded-2xl bg-gradient-to-br from-primary/5 via-background to-accent/5 border border-primary/20 p-8 sm:p-12">
+            <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-3 text-center">Event Registration</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 text-center">
+              Register for an International Event
             </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto mb-8">
-              Are you a youth organization founder or leader? Apply to become part of the Y.O.U. global network. No membership fees — just a shared commitment to youth empowerment.
+            <p className="text-lg text-foreground/70 max-w-2xl mx-auto mb-8 text-center">
+              Fill in your details below. Any Register button above will auto-scroll to this form and pre-select your event.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                className="bg-accent hover:bg-accent/90 text-white"
-                onClick={() => setShowApplyForm(true)}
-              >
-                Apply Now — It&apos;s Free
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                onClick={() => document.getElementById('events')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                Browse Events First
-              </Button>
-            </div>
-            <p className="mt-6 text-sm text-foreground/50">
-              Applications reviewed within 5 business days. Interview scheduled if selected.
+
+            <form onSubmit={handleRegistrationFormSubmit} className="space-y-5">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label className="mb-1.5 block text-sm font-medium text-foreground">
+                    Full Name <span className="text-destructive">*</span>
+                  </label>
+                  <Input
+                    required
+                    placeholder="Your full name"
+                    value={registrationForm.name}
+                    onChange={(e) => setRegistrationForm((prev) => ({ ...prev, name: e.target.value }))}
+                  />
+                </div>
+                <div>
+                  <label className="mb-1.5 block text-sm font-medium text-foreground">
+                    Email <span className="text-destructive">*</span>
+                  </label>
+                  <Input
+                    required
+                    type="email"
+                    placeholder="your@email.com"
+                    value={registrationForm.email}
+                    onChange={(e) => setRegistrationForm((prev) => ({ ...prev, email: e.target.value }))}
+                  />
+                </div>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label className="mb-1.5 block text-sm font-medium text-foreground">Phone</label>
+                  <Input
+                    placeholder="+84..."
+                    value={registrationForm.phone}
+                    onChange={(e) => setRegistrationForm((prev) => ({ ...prev, phone: e.target.value }))}
+                  />
+                </div>
+                <div>
+                  <label className="mb-1.5 block text-sm font-medium text-foreground">Organization</label>
+                  <Input
+                    placeholder="Your organization"
+                    value={registrationForm.organization}
+                    onChange={(e) => setRegistrationForm((prev) => ({ ...prev, organization: e.target.value }))}
+                  />
+                </div>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label className="mb-1.5 block text-sm font-medium text-foreground">
+                    Event <span className="text-destructive">*</span>
+                  </label>
+                  <select
+                    required
+                    value={registrationForm.eventTitle}
+                    onChange={(e) => setRegistrationForm((prev) => ({ ...prev, eventTitle: e.target.value }))}
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                  >
+                    {EVENTS.map((event) => (
+                      <option key={event.title} value={event.title} disabled={!event.isNext}>
+                        {event.title} ({event.date})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="mb-1.5 block text-sm font-medium text-foreground">
+                    Ticket Type <span className="text-destructive">*</span>
+                  </label>
+                  <select
+                    required
+                    value={registrationForm.ticketType}
+                    onChange={(e) => setRegistrationForm((prev) => ({
+                      ...prev,
+                      ticketType: sanitizeTicketType(e.target.value) || '',
+                    }))}
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                  >
+                    <option value="" disabled>Select a ticket</option>
+                    {TICKET_TYPES.map((ticket) => (
+                      <option key={ticket.id} value={ticket.id}>
+                        {ticket.label} - ${ticket.price}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="pt-2 flex justify-center">
+                <Button type="submit" size="lg" className="bg-primary hover:bg-primary/90 text-white px-8">
+                  Continue to Payment
+                </Button>
+              </div>
+            </form>
+
+            <p className="mt-6 text-sm text-foreground/50 text-center">
+              You will review your details once more before completing secure payment.
             </p>
           </div>
         </div>
@@ -519,14 +680,6 @@ export default function Home() {
       {/* ── Footer ──────────────────────────────────────────────────────────── */}
       <footer id="contact" className="border-t border-border bg-primary text-white py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Logo + tagline */}
-          <div className="mb-12 flex flex-col items-center text-center gap-3">
-            <Image src="/you-logo-footer.png" alt="Y.O.U." width={120} height={40} className="h-10 w-auto brightness-0 invert" />
-            <p className="text-white/70 text-sm max-w-xs">
-              Connecting youth organizations globally since 2026.
-            </p>
-          </div>
-
           <div className="grid gap-12 md:grid-cols-2 mb-12">
             <div className="space-y-4">
               <h3 className="text-lg font-semibold">Contact Information</h3>
@@ -600,6 +753,7 @@ export default function Home() {
         eventTitle={registration.eventTitle}
         eventDate={registration.eventDate}
         preselectedTicket={registration.preselectedTicket}
+        initialFormData={registration.initialFormData}
       />
 
       {/* Founder Application Dialog */}

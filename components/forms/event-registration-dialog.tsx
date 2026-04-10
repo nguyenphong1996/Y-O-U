@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 import {
   Elements,
@@ -28,6 +28,7 @@ import {
 import { CheckCircle, CreditCard, Loader2, ChevronRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { TICKET_TYPES } from '@/components/sections/pricing-section'
+import type { RegistrationPrefillData } from '@/components/forms/event-registration.types'
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
@@ -47,6 +48,7 @@ interface EventRegistrationDialogProps {
   eventTitle: string
   eventDate?: string
   preselectedTicket?: string
+  initialFormData?: RegistrationPrefillData
 }
 
 // ─── Main Dialog ─────────────────────────────────────────────────────────────
@@ -57,14 +59,23 @@ export function EventRegistrationDialog({
   eventTitle,
   eventDate,
   preselectedTicket,
+  initialFormData,
 }: EventRegistrationDialogProps) {
+  const validTicketTypeIds = new Set(TICKET_TYPES.map((ticket) => ticket.id))
+  const sanitizeTicketType = (ticketType?: string) => {
+    if (!ticketType) return ''
+    return validTicketTypeIds.has(ticketType) ? ticketType : ''
+  }
+
+  const initialTicketType = sanitizeTicketType(preselectedTicket || initialFormData?.ticketType)
+
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    phone: '',
-    organization: '',
-    ticketType: preselectedTicket || '',
+    name: initialFormData?.name || '',
+    email: initialFormData?.email || '',
+    phone: initialFormData?.phone || '',
+    organization: initialFormData?.organization || '',
+    ticketType: initialTicketType,
   })
   const [clientSecret, setClientSecret] = useState('')
   const [bookingCode, setBookingCode] = useState('')
@@ -73,9 +84,21 @@ export function EventRegistrationDialog({
 
   const selectedTicket = TICKET_TYPES.find((t) => t.id === formData.ticketType)
 
+  useEffect(() => {
+    if (!open) return
+
+    setFormData({
+      name: initialFormData?.name || '',
+      email: initialFormData?.email || '',
+      phone: initialFormData?.phone || '',
+      organization: initialFormData?.organization || '',
+      ticketType: sanitizeTicketType(preselectedTicket || initialFormData?.ticketType),
+    })
+  }, [open, preselectedTicket, initialFormData])
+
   const handleStep1Submit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!formData.ticketType) {
+    if (!formData.ticketType || !selectedTicket) {
       setError('Please select a ticket type')
       return
     }
@@ -228,7 +251,7 @@ export function EventRegistrationDialog({
                 </label>
                 <Select
                   value={formData.ticketType}
-                  onValueChange={(v) => setFormData({ ...formData, ticketType: v })}
+                  onValueChange={(v) => setFormData({ ...formData, ticketType: sanitizeTicketType(v) })}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Select a ticket type" />
