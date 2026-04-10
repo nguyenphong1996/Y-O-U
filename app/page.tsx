@@ -267,6 +267,170 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Event Roadmap Section */}
+      <section className="border-t border-border bg-gradient-to-b from-background to-secondary/5 py-20 sm:py-32">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-16 text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+              Global Events Roadmap
+            </h2>
+            <p className="text-lg text-foreground/70">Join us at key moments throughout 2026</p>
+          </div>
+
+          <div className="relative">
+            {/* Timeline Line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-primary via-secondary to-accent hidden lg:block"></div>
+
+            {/* Timeline Events */}
+            <div className="space-y-12">
+              {/* Q2 - June */}
+              <div className="flex items-center gap-8">
+                <div className="flex-1 text-right hidden lg:block">
+                  <div className="bg-primary/10 border border-primary/30 rounded-lg p-6">
+                    <p className="text-sm font-semibold text-primary mb-2">Q2 2026</p>
+                    <h3 className="text-xl font-bold text-foreground">Global Youth Summit</h3>
+                    <p className="text-sm text-foreground/70 mt-2">Singapore • June 15-17</p>
+                  </div>
+                </div>
+                <div className="flex-shrink-0 w-12 h-12 bg-primary rounded-full border-4 border-background flex items-center justify-center hidden lg:flex">
+                  <div className="w-3 h-3 bg-white rounded-full"></div>
+                </div>
+                <div className="flex-1 hidden lg:block"></div>
+
+                {/* Mobile View */}
+                <div className="lg:hidden flex-1">
+                  <div className="bg-primary/10 border border-primary/30 rounded-lg p-6">
+                    <p className="text-sm font-semibold text-primary mb-2">Q2 2026</p>
+                    <h3 className="text-xl font-bold text-foreground">Global Youth Summit</h3>
+                    <p className="text-sm text-foreground/70 mt-2">Singapore • June 15-17</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Q3 - July */}
+              <div className="flex items-center gap-8 flex-row-reverse">
+                <div className="flex-1 hidden lg:block">
+                  <div className="bg-secondary/10 border border-secondary/30 rounded-lg p-6">
+                    <p className="text-sm font-semibold text-secondary mb-2">Q3 2026</p>
+                    <h3 className="text-xl font-bold text-foreground">African Leadership Conference</h3>
+                    <p className="text-sm text-foreground/70 mt-2">Nairobi, Kenya • July 20-22</p>
+                  </div>
+                </div>
+                <div className="flex-shrink-0 w-12 h-12 bg-secondary rounded-full border-4 border-background flex items-center justify-center hidden lg:flex">
+                  <div className="w-3 h-3 bg-white rounded-full"></div>
+                </div>
+                <div className="flex-1 text-left hidden lg:block"></div>
+
+                {/* Mobile View */}
+                <div className="lg:hidden flex-1">
+                  <div className="bg-secondary/10 border border-secondary/30 rounded-lg p-6">
+                    <p className="text-sm font-semibold text-secondary mb-2">Q3 2026</p>
+                    <h3 className="text-xl font-bold text-foreground">African Leadership Conference</h3>
+                    <p className="text-sm text-foreground/70 mt-2">Nairobi, Kenya • July 20-22</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Q3 - August */}
+              <div className="flex items-center gap-8">
+                <div className="flex-1 text-right hidden lg:block">
+                  <div className="bg-accent/10 border border-accent/30 rounded-lg p-6">
+                    <p className="text-sm font-semibold text-accent mb-2">Q3 2026</p>
+                    <h3 className="text-xl font-bold text-foreground">Asia-Pacific Youth Forum</h3>
+                    <p className="text-sm text-foreground/70 mt-2">Bangkok, Thailand • August 10-12</p>
+                  </div>
+                </div>
+                <div className="flex-shrink-0 w-12 h-12 bg-accent rounded-full border-4 border-background flex items-center justify-center hidden lg:flex">
+                  <div className="w-3 h-3 bg-white rounded-full"></div>
+                </div>
+                <div className="flex-1 hidden lg:block"></div>
+
+                {/* Mobile View */}
+                <div className="lg:hidden flex-1">
+                  <div className="bg-accent/10 border border-accent/30 rounded-lg p-6">
+                    <p className="text-sm font-semibold text-accent mb-2">Q3 2026</p>
+                    <h3 className="text-xl font-bold text-foreground">Asia-Pacific Youth Forum</h3>
+                    <p className="text-sm text-foreground/70 mt-2">Bangkok, Thailand • August 10-12</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Q3 - September */}
+              <div className="flex items-center gap-8 flex-row-reverse">
+                <div className="flex-1 hidden lg:block">
+                  <div className="bg-primary/10 border border-primary/30 rounded-lg p-6">
+                    <p className="text-sm font-semibold text-primary mb-2">Q3 2026</p>
+                    <h3 className="text-xl font-bold text-foreground">European Youth Congress</h3>
+                    <p className="text-sm text-foreground/70 mt-2">Berlin, Germany • September 5-7</p>
+                  </div>
+                </div>
+                <div className="flex-shrink-0 w-12 h-12 bg-primary rounded-full border-4 border-background flex items-center justify-center hidden lg:flex">
+                  <div className="w-3 h-3 bg-white rounded-full"></div>
+                </div>
+                <div className="flex-1 text-left hidden lg:block"></div>
+
+                {/* Mobile View */}
+                <div className="lg:hidden flex-1">
+                  <div className="bg-primary/10 border border-primary/30 rounded-lg p-6">
+                    <p className="text-sm font-semibold text-primary mb-2">Q3 2026</p>
+                    <h3 className="text-xl font-bold text-foreground">European Youth Congress</h3>
+                    <p className="text-sm text-foreground/70 mt-2">Berlin, Germany • September 5-7</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Q4 - October */}
+              <div className="flex items-center gap-8">
+                <div className="flex-1 text-right hidden lg:block">
+                  <div className="bg-secondary/10 border border-secondary/30 rounded-lg p-6">
+                    <p className="text-sm font-semibold text-secondary mb-2">Q4 2026</p>
+                    <h3 className="text-xl font-bold text-foreground">Americas Youth Alliance</h3>
+                    <p className="text-sm text-foreground/70 mt-2">Toronto, Canada • October 15-17</p>
+                  </div>
+                </div>
+                <div className="flex-shrink-0 w-12 h-12 bg-secondary rounded-full border-4 border-background flex items-center justify-center hidden lg:flex">
+                  <div className="w-3 h-3 bg-white rounded-full"></div>
+                </div>
+                <div className="flex-1 hidden lg:block"></div>
+
+                {/* Mobile View */}
+                <div className="lg:hidden flex-1">
+                  <div className="bg-secondary/10 border border-secondary/30 rounded-lg p-6">
+                    <p className="text-sm font-semibold text-secondary mb-2">Q4 2026</p>
+                    <h3 className="text-xl font-bold text-foreground">Americas Youth Alliance</h3>
+                    <p className="text-sm text-foreground/70 mt-2">Toronto, Canada • October 15-17</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Q4 - November */}
+              <div className="flex items-center gap-8 flex-row-reverse">
+                <div className="flex-1 hidden lg:block">
+                  <div className="bg-accent/10 border border-accent/30 rounded-lg p-6">
+                    <p className="text-sm font-semibold text-accent mb-2">Q4 2026</p>
+                    <h3 className="text-xl font-bold text-foreground">Middle East Youth Initiative</h3>
+                    <p className="text-sm text-foreground/70 mt-2">Dubai, UAE • November 8-10</p>
+                  </div>
+                </div>
+                <div className="flex-shrink-0 w-12 h-12 bg-accent rounded-full border-4 border-background flex items-center justify-center hidden lg:flex">
+                  <div className="w-3 h-3 bg-white rounded-full"></div>
+                </div>
+                <div className="flex-1 text-left hidden lg:block"></div>
+
+                {/* Mobile View */}
+                <div className="lg:hidden flex-1">
+                  <div className="bg-accent/10 border border-accent/30 rounded-lg p-6">
+                    <p className="text-sm font-semibold text-accent mb-2">Q4 2026</p>
+                    <h3 className="text-xl font-bold text-foreground">Middle East Youth Initiative</h3>
+                    <p className="text-sm text-foreground/70 mt-2">Dubai, UAE • November 8-10</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Global Citizen Passport Section */}
       <section id="passport" className="border-t border-border bg-white py-20 sm:py-32 dark:bg-slate-950/50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
