@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 import {
   Elements,
@@ -47,6 +47,13 @@ interface EventRegistrationDialogProps {
   eventTitle: string
   eventDate?: string
   preselectedTicket?: string
+  initialFormData?: {
+    name: string
+    email: string
+    phone: string
+    organization: string
+    ticketType: string
+  }
 }
 
 // ─── Main Dialog ─────────────────────────────────────────────────────────────
@@ -57,14 +64,15 @@ export function EventRegistrationDialog({
   eventTitle,
   eventDate,
   preselectedTicket,
+  initialFormData,
 }: EventRegistrationDialogProps) {
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    phone: '',
-    organization: '',
-    ticketType: preselectedTicket || '',
+    name: initialFormData?.name || '',
+    email: initialFormData?.email || '',
+    phone: initialFormData?.phone || '',
+    organization: initialFormData?.organization || '',
+    ticketType: preselectedTicket || initialFormData?.ticketType || '',
   })
   const [clientSecret, setClientSecret] = useState('')
   const [bookingCode, setBookingCode] = useState('')
@@ -72,6 +80,18 @@ export function EventRegistrationDialog({
   const [error, setError] = useState('')
 
   const selectedTicket = TICKET_TYPES.find((t) => t.id === formData.ticketType)
+
+  useEffect(() => {
+    if (!open) return
+
+    setFormData({
+      name: initialFormData?.name || '',
+      email: initialFormData?.email || '',
+      phone: initialFormData?.phone || '',
+      organization: initialFormData?.organization || '',
+      ticketType: preselectedTicket || initialFormData?.ticketType || '',
+    })
+  }, [open, preselectedTicket, initialFormData])
 
   const handleStep1Submit = async (e: React.FormEvent) => {
     e.preventDefault()
