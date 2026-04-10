@@ -13,6 +13,7 @@ import { BenefitsSection } from '@/components/sections/benefits-section'
 import { PricingSection } from '@/components/sections/pricing-section'
 import { FAQSection } from '@/components/sections/faq-section'
 import { TestimonialsSection } from '@/components/sections/testimonials-section'
+import { EventsCountdownBanner } from '@/components/sections/events-countdown-banner'
 import { EventRegistrationDialog } from '@/components/forms/event-registration-dialog'
 import { FounderApplicationForm } from '@/components/forms/founder-application-form'
 import { CountdownTimer } from '@/components/countdown-timer'
@@ -93,6 +94,8 @@ export default function Home() {
   const openRegistration = (eventTitle: string, eventDate: string, preselectedTicket?: string) => {
     setRegistration({ open: true, eventTitle, eventDate, preselectedTicket })
   }
+
+  const nextEvent = EVENTS.find((event) => event.isNext) ?? EVENTS[0]
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-blue-50 dark:to-slate-950">
@@ -383,6 +386,13 @@ export default function Home() {
       {/* ── Events ──────────────────────────────────────────────────────────── */}
       <section id="events" className="border-t border-border bg-white py-20 sm:py-32 dark:bg-slate-950/50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <EventsCountdownBanner
+            title={nextEvent.title}
+            dateLabel={`${nextEvent.date} - ${nextEvent.location}`}
+            targetDate={nextEvent.isoDate}
+            onRegister={() => openRegistration(nextEvent.title, nextEvent.date)}
+          />
+
           <div className="mb-16 text-center">
             <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-3">2026 Calendar</p>
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
@@ -519,14 +529,6 @@ export default function Home() {
       {/* ── Footer ──────────────────────────────────────────────────────────── */}
       <footer id="contact" className="border-t border-border bg-primary text-white py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Logo + tagline */}
-          <div className="mb-12 flex flex-col items-center text-center gap-3">
-            <Image src="/you-logo-footer.png" alt="Y.O.U." width={120} height={40} className="h-10 w-auto brightness-0 invert" />
-            <p className="text-white/70 text-sm max-w-xs">
-              Connecting youth organizations globally since 2026.
-            </p>
-          </div>
-
           <div className="grid gap-12 md:grid-cols-2 mb-12">
             <div className="space-y-4">
               <h3 className="text-lg font-semibold">Contact Information</h3>
