@@ -175,7 +175,7 @@ function HeroSlider({ onRegister, onJoin }: { onRegister: () => void; onJoin: ()
             {/* Stat badges – Desktop only */}
             <div className="hidden md:grid grid-cols-2 gap-6 relative">
               <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#47a1ff]/20 blur-[120px] rounded-full pointer-events-none" />
-              <div className="bg-white/5 backdrop-blur-2xl border border-white/10 p-8 rounded-3xl space-y-2 translate-y-12">
+              <div className="bg-white/5 backdrop-blur-2xl border border-white/10 p-8 rounded-3xl space-y-2">
                 <div className="text-5xl font-black text-white">150+</div>
                 <div className="text-white/70 font-medium">Global Chapters</div>
               </div>
