@@ -7,14 +7,14 @@ import {
 
 const faqs = [
   {
-    question: 'Who can apply to join the Y.O.U. alliance?',
+    question: 'Who can apply to join the Y.O.U alliance?',
     answer:
       'Any registered youth organization, student-led initiative, or youth-focused NGO can apply. We welcome organizations from all countries and sectors — education, environment, social entrepreneurship, arts, sports, and more. The founding team should be 35 years old or younger.',
   },
   {
-    question: 'Is there a membership fee to join Y.O.U.?',
+    question: 'Is there a membership fee to join Y.O.U?',
     answer:
-      'No. Joining the Y.O.U. alliance as a founding member organization is completely free. We believe barriers to entry undermine the spirit of global youth collaboration. Revenue from events and the Global Citizen Passport supports our operations.',
+      'No. Joining the Y.O.U alliance as a founding member organization is completely free. We believe barriers to entry undermine the spirit of global youth collaboration. Revenue from events and the Global Citizen Passport supports our operations.',
   },
   {
     question: 'What is the selection process for new member organizations?',
@@ -39,7 +39,7 @@ const faqs = [
   {
     question: 'How does the Global Citizen Passport work?',
     answer:
-      'The Global Citizen Passport is a digital credential that tracks and verifies your international learning journey — events attended, trainings completed, and cross-cultural projects contributed to. It\'s recognized by Y.O.U. partner institutions globally. Member organizations can issue Passport stamps to their own participants.',
+      'The Global Citizen Passport is a digital credential that tracks and verifies your international learning journey — events attended, trainings completed, and cross-cultural projects contributed to. It\'s recognized by Y.O.U partner institutions globally. Member organizations can issue Passport stamps to their own participants.',
   },
   {
     question: 'Can I get a refund if I cannot attend after registering?',
@@ -66,7 +66,7 @@ export function FAQSection() {
           <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-3">Got Questions?</p>
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Frequently Asked Questions</h2>
           <p className="text-lg text-foreground/70">
-            Everything you need to know about Y.O.U., our events, and the Global Citizen Passport.
+            Everything you need to know about Y.O.U, our events, and the Global Citizen Passport.
           </p>
         </div>
 

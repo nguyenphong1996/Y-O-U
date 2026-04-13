@@ -5,14 +5,14 @@ const steps = [
     number: '01',
     title: 'Connect',
     description:
-      'Join the Y.O.U. network and connect with youth organization founders and leaders from 85+ countries. Share your mission, discover aligned organizations, and build meaningful cross-border partnerships.',
+      'Join the Y.O.U network and connect with youth organization founders and leaders from 85+ countries. Share your mission, discover aligned organizations, and build meaningful cross-border partnerships.',
     icon: '🌐',
   },
   {
     number: '02',
     title: 'Build Capacity',
     description:
-      'Access regional knowledge exchanges, leadership training programs, and mentorship opportunities. Grow your organization\'s capabilities through Y.O.U.\'s structured development framework and peer learning.',
+      'Access regional knowledge exchanges, leadership training programs, and mentorship opportunities. Grow your organization\'s capabilities through Y.O.U\'s structured development framework and peer learning.',
     icon: '📈',
   },
   {
@@ -30,7 +30,7 @@ export function HowItWorksSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-16 text-center">
           <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-3">The Process</p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">How Y.O.U. Works</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">How Y.O.U Works</h2>
           <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
             A simple, powerful framework for youth organizations to connect, grow, and create meaningful global impact.
           </p>

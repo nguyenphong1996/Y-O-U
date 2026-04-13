@@ -18,12 +18,12 @@ function ThankYouContent() {
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: 'I\'m attending a Y.O.U. event!',
-        text: `I just registered for ${event} with Y.O.U. — Youth Organization Union. Join me! #YOUTHS #GlobalCitizen`,
+        title: 'I\'m attending a Y.O.U event!',
+        text: `I just registered for ${event} with Y.O.U — Youth Organization Union. Join me! #YOUTHS #GlobalCitizen`,
         url: window.location.origin,
       })
     } else {
-      const text = encodeURIComponent(`I just registered for ${event} with Y.O.U. — Youth Organization Union! #YOUTHS #GlobalCitizen`)
+      const text = encodeURIComponent(`I just registered for ${event} with Y.O.U — Youth Organization Union! #YOUTHS #GlobalCitizen`)
       window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank')
     }
   }
@@ -33,8 +33,8 @@ function ThankYouContent() {
       {/* Header */}
       <header className="border-b border-border bg-white/95 backdrop-blur dark:bg-slate-900/95 px-4 py-4">
         <div className="mx-auto max-w-7xl flex items-center gap-3">
-          <Image src="/you-icon.png" alt="Y.O.U." width={40} height={40} className="h-10 w-auto" />
-          <span className="font-bold text-xl text-primary">Y.O.U.</span>
+          <Image src="/you-icon.png" alt="Y.O.U" width={40} height={40} className="h-10 w-auto" />
+          <span className="font-bold text-xl text-primary">Y.O.U</span>
         </div>
       </header>
 
@@ -49,7 +49,7 @@ function ThankYouContent() {
 
           <div className="space-y-2">
             <h1 className="text-3xl font-bold text-foreground">Registration Successful!</h1>
-            <p className="text-foreground/70">Welcome to the Y.O.U. global community.</p>
+            <p className="text-foreground/70">Welcome to the Y.O.U global community.</p>
           </div>
 
           <Card className="border-primary/20 bg-white dark:bg-slate-900">

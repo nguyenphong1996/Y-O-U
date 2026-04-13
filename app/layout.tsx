@@ -7,11 +7,11 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Y.O.U. - Youth Organization Union | Global Citizen Network',
-  description: 'Connect youth organization founders with international events, educational programs, and the Global Citizen Passport. Build your leadership journey with Y.O.U.',
+  title: 'Y.O.U - Youth Organization Union | Global Citizen Network',
+  description: 'Connect youth organization founders with international events, educational programs, and the Global Citizen Passport. Build your leadership journey with Y.O.U',
   generator: 'v0.app',
   openGraph: {
-    title: 'Youth Organization Union - All Youths Start with Y.O.U.',
+    title: 'Youth Organization Union - All Youths Start with Y.O.U',
     description: 'A global network for youth organization founders connecting with events and transformative experiences.',
     url: 'https://you-global.org',
     type: 'website',

@@ -11,7 +11,7 @@ const testimonials = [
     role: 'Founder, Youth Innovators Ghana',
     country: '🇬🇭 Ghana',
     quote:
-      'Y.O.U. completely changed my perspective on what a local organization can achieve globally. The connections I made at the African Leadership Conference led to a joint project that now serves 12,000 young people across West Africa.',
+      'Y.O.U completely changed my perspective on what a local organization can achieve globally. The connections I made at the African Leadership Conference led to a joint project that now serves 12,000 young people across West Africa.',
   },
   {
     name: 'Priya Sharma',
@@ -25,42 +25,42 @@ const testimonials = [
     role: 'Co-Founder, Juventud Activa México',
     country: '🇲🇽 Mexico',
     quote:
-      'I was skeptical about paying to attend an international conference. But the Y.O.U. Summit Pass paid for itself in the first month — through partnerships, funding introductions, and skills I immediately applied at home.',
+      'I was skeptical about paying to attend an international conference. But the Y.O.U Summit Pass paid for itself in the first month — through partnerships, funding introductions, and skills I immediately applied at home.',
   },
   {
     name: 'Fatimah Al-Rashid',
     role: 'Program Lead, MENA Youth Council',
     country: '🇦🇪 UAE',
     quote:
-      'The Y.O.U. alliance is rare because it genuinely values our regional context. They didn\'t try to impose a Western model of youth leadership — instead, they built a space where diverse approaches are celebrated and learned from.',
+      'The Y.O.U alliance is rare because it genuinely values our regional context. They didn\'t try to impose a Western model of youth leadership — instead, they built a space where diverse approaches are celebrated and learned from.',
   },
   {
     name: 'Linh Nguyen',
     role: 'Director, Vietnam Youth Leadership Hub',
     country: '🇻🇳 Vietnam',
     quote:
-      'Attending the Asia-Pacific Youth Forum in Bangkok as a Y.O.U. delegate was a turning point. I came back with 3 potential partners, a clearer theory of change, and the confidence that our local work matters on a global stage.',
+      'Attending the Asia-Pacific Youth Forum in Bangkok as a Y.O.U delegate was a turning point. I came back with 3 potential partners, a clearer theory of change, and the confidence that our local work matters on a global stage.',
   },
   {
     name: 'Johann Müller',
     role: 'Founder, EuroYouth Network',
     country: '🇩🇪 Germany',
     quote:
-      'What sets Y.O.U. apart is the quality of curation. Every session, speaker, and delegate brought something genuine. It\'s the only conference I\'ve attended where every conversation felt like it could become a real collaboration.',
+      'What sets Y.O.U apart is the quality of curation. Every session, speaker, and delegate brought something genuine. It\'s the only conference I\'ve attended where every conversation felt like it could become a real collaboration.',
   },
   {
     name: 'Amani Kibira',
     role: 'National Coordinator, Youth Alliance Kenya',
     country: '🇰🇪 Kenya',
     quote:
-      'The fully funded scholarship track is a game-changer. It meant our organization — still in early stages — could participate at the same table as established players. Y.O.U. walks the talk on inclusion.',
+      'The fully funded scholarship track is a game-changer. It meant our organization — still in early stages — could participate at the same table as established players. Y.O.U walks the talk on inclusion.',
   },
   {
     name: 'Sasha Petrov',
     role: 'Youth Advocate, Eastern European Coalition',
     country: '🇺🇦 Ukraine',
     quote:
-      'In a time when our region faces enormous challenges, connecting with 200+ youth leaders from around the world reminded us that we are not alone. Y.O.U. creates solidarity, not just networking.',
+      'In a time when our region faces enormous challenges, connecting with 200+ youth leaders from around the world reminded us that we are not alone. Y.O.U creates solidarity, not just networking.',
   },
 ]
 
@@ -106,7 +106,7 @@ export function TestimonialsSection() {
           <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-3">Social Proof</p>
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">What Delegates Say</h2>
           <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-            Real voices from youth leaders across 6 continents who have experienced Y.O.U.
+            Real voices from youth leaders across 6 continents who have experienced Y.O.U
           </p>
         </div>
 

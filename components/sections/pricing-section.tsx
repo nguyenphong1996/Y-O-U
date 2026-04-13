@@ -17,7 +17,7 @@ export const TICKET_TYPES = [
       'Networking dinners & receptions',
       'Digital delegate package',
       'Certificate of participation',
-      'Y.O.U. community access (1 year)',
+      'Y.O.U community access (1 year)',
     ],
     highlight: true,
   },

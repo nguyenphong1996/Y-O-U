@@ -5,7 +5,7 @@ const benefits = [
     icon: '🗺️',
     title: 'Regional Knowledge Access',
     description:
-      'Gain deep insight into youth ecosystems across Southeast Asia, Africa, Europe, and the Americas. Tap into Y.O.U.\'s curated intelligence on funding landscapes, policy environments, and emerging opportunities.',
+      'Gain deep insight into youth ecosystems across Southeast Asia, Africa, Europe, and the Americas. Tap into Y.O.U\'s curated intelligence on funding landscapes, policy environments, and emerging opportunities.',
   },
   {
     icon: '🎓',
@@ -17,7 +17,7 @@ const benefits = [
     icon: '🤝',
     title: 'Project Support & Collaboration',
     description:
-      'Get matched with complementary organizations for joint projects. Receive technical assistance, mentorship from experienced leaders, and access to Y.O.U.\'s resource library for NGO operations.',
+      'Get matched with complementary organizations for joint projects. Receive technical assistance, mentorship from experienced leaders, and access to Y.O.U\'s resource library for NGO operations.',
   },
   {
     icon: '🛂',
@@ -29,7 +29,7 @@ const benefits = [
     icon: '🌍',
     title: 'International Visibility & Network',
     description:
-      'Get featured in Y.O.U. publications, international conferences, and partner channels. Build your organization\'s global profile and forge strategic alliances with leaders across 85+ countries.',
+      'Get featured in Y.O.U publications, international conferences, and partner channels. Build your organization\'s global profile and forge strategic alliances with leaders across 85+ countries.',
   },
 ]
 
@@ -41,7 +41,7 @@ export function BenefitsSection() {
           <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-3">Why Join</p>
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Membership Benefits</h2>
           <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-            Y.O.U. membership gives your organization the tools, network, and visibility to grow beyond borders.
+            Y.O.U membership gives your organization the tools, network, and visibility to grow beyond borders.
           </p>
         </div>
 
