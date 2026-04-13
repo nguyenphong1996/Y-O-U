@@ -1,0 +1,22 @@
+{
+  // Tên worker — đổi tùy ý
+  "name": "y-o-u",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2025-01-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Assets (static files)
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  }
+
+  // TODO: Sau khi tạo D1 database, thêm vào đây:
+  // "d1_databases": [
+  //   {
+  //     "binding": "DB",
+  //     "database_name": "you-db",
+  //     "database_id": "<your-d1-database-id>"
+  //   }
+  // ]
+}
