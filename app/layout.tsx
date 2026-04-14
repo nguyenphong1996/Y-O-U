@@ -1,47 +1,39 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { SiteHeader } from '@/components/layout/site-header'
+import { SiteFooter } from '@/components/layout/site-footer'
 import './globals.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
-  title: 'Y.O.U - Youth Organization Union | Global Citizen Network',
-  description: 'Connect youth organization founders with international events, educational programs, and the Global Citizen Passport. Build your leadership journey with Y.O.U',
-  generator: 'v0.app',
+  title: 'Y.O.U Alliance | Youth Organization Union Official Portal',
+  description:
+    'Official website of Youth Organization Union (Y.O.U), connecting youth organizations worldwide through leadership, collaboration, and SDG impact programs.',
   openGraph: {
-    title: 'Youth Organization Union - All Youths Start with Y.O.U',
-    description: 'A global network for youth organization founders connecting with events and transformative experiences.',
+    title: 'Y.O.U Alliance — All Youths Start with Y.O.U',
+    description:
+      'Official portal of the Youth Organization Union global alliance.',
     url: 'https://you-global.org',
     type: 'website',
   },
   icons: {
     icon: [
-      {
-        url: '/you-icon.png',
-        type: 'image/png',
-      },
+      { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
+      { url: '/icon-dark-32x32.png', media: '(prefers-color-scheme: dark)' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
     ],
     apple: '/you-icon.png',
-  },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5,
-    userScalable: true,
   },
 }
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className="font-sans antialiased">
-        {children}
+      <body className="font-sans antialiased bg-[#f8fbff] text-[#111827]">
+        <SiteHeader />
+        <main>{children}</main>
+        <SiteFooter />
         <Analytics />
       </body>
     </html>

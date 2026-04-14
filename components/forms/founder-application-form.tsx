@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { CheckCircle, Loader2 } from 'lucide-react'
 
 export function FounderApplicationForm() {
+  const currentYear = new Date().getFullYear()
   const [formData, setFormData] = useState({
     founderName: '',
     email: '',
@@ -91,7 +92,7 @@ export function FounderApplicationForm() {
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium text-foreground mb-1.5">Year Founded</label>
-          <Input type="number" placeholder="2020" min="1900" max="2026" value={formData.yearFounded} onChange={set('yearFounded')} />
+          <Input type="number" placeholder="2020" min="1900" max={String(currentYear)} value={formData.yearFounded} onChange={set('yearFounded')} />
         </div>
         <div>
           <label className="block text-sm font-medium text-foreground mb-1.5">Current Members</label>
@@ -132,7 +133,7 @@ export function FounderApplicationForm() {
 
       {error && <p className="text-sm text-destructive">{error}</p>}
 
-      <Button type="submit" disabled={loading} className="w-full bg-accent hover:bg-accent/90 text-white">
+      <Button type="submit" disabled={loading} className="w-full bg-[#0057b8] hover:bg-[#004a9b] text-white">
         {loading ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
